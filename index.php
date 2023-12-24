@@ -56,16 +56,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td><a href="" class="text-center btn btn-warning "><i class="fa-regular fa-pen-to-square"></i></a></td>
-                            <td><a href="" class="text-center btn btn-danger "><i class="fa-solid fa-trash"></i></a></td>
-                        </tr>
-                        
+                        <?php
+                        include("model/conexion.php");
+                        $sql = $conexion->query("select * from carros");
+                        while ($datos = $sql->fetch_object()) { ?>
+                            <tr>
+                                <th scope="row"><?= $datos->placa ?> </th>
+                                <td><?= $datos->marca ?></td>
+                                <td><?= $datos->modelo ?></td>
+                                <td><?= $datos->anio ?></td>
+                                <td><?= $datos->color ?></td>
+                                <td><a href="" class="text-center btn btn-warning "><i class="fa-regular fa-pen-to-square"></i></a></td>
+                                <td><a href="" class="text-center btn btn-danger "><i class="fa-solid fa-trash"></i></a></td>
+                            </tr>
+                        <?php }
+                        ?>
+
                     </tbody>
                 </table>
             </div>

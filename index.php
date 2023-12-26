@@ -14,8 +14,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-4">
-                <form>
+                <form method="POST">
                     <h2 class="text-center p-3">Registro de vehículos</h2>
+                    <?php
+                    include("model/conexion.php");
+                    include("controller/registro_carros.php");
+                    ?>
                     <div class="mb-3">
                         <label for="inPutPlaca" class="form-label">Placa</label>
                         <input type="text" class="form-control" id="inPutPlaca" name="placa">
@@ -27,7 +31,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="inPutPlaca" class="form-label">Modelo</label>
-                        <input type="text" class="form-control" id="inPutPlaca" name="placa">
+                        <input type="text" class="form-control" id="inPutPlaca" name="modelo">
 
                     </div>
                     <div class="mb-3">
@@ -39,7 +43,7 @@
                         <input type="text" class="form-control" id="inPutPlaca" name="color">
 
                     </div>
-                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <button type="submit" class="btn btn-primary" name="btnRegistrar" value="ok">Registrar</button>
                 </form>
             </div>
             <div class="col-8">
@@ -61,12 +65,12 @@
                         $sql = $conexion->query("select * from carros");
                         while ($datos = $sql->fetch_object()) { ?>
                             <tr>
-                                <th scope="row"><?= $datos->placa ?> </th>
+                                <th><?= $datos->placa ?> </th>
                                 <td><?= $datos->marca ?></td>
                                 <td><?= $datos->modelo ?></td>
                                 <td><?= $datos->anio ?></td>
                                 <td><?= $datos->color ?></td>
-                                <td><a href="" class="text-center btn btn-warning "><i class="fa-regular fa-pen-to-square"></i></a></td>
+                                <td><a href="view/view_modificar.php?id=<?= $datos->placa?>" class="text-center btn btn-warning "><i class="fa-regular fa-pen-to-square"></i></a></td>
                                 <td><a href="" class="text-center btn btn-danger "><i class="fa-solid fa-trash"></i></a></td>
                             </tr>
                         <?php }
@@ -78,7 +82,7 @@
         </div>
     </div>
 
-
+    <script src="js/codigo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
 </body>

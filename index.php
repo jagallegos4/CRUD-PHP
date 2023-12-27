@@ -5,19 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD PHP y MySql</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/7aaabef60b.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <h1 class="text-center p-3">CRUD con PHP y MySql</h1>
+    <?php
+        include "model/conexion.php"; 
+        include "controller/eliminar.php";
+    ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-4">
                 <form method="POST">
                     <h2 class="text-center p-3">Registro de vehículos</h2>
                     <?php
-                    include("model/conexion.php");
+                    //include("model/conexion.php");
                     include("controller/registro_carros.php");
                     ?>
                     <div class="mb-3">
@@ -47,6 +52,7 @@
                 </form>
             </div>
             <div class="col-8">
+
                 <table class="table">
                     <thead class="table-info">
                         <tr>
@@ -64,15 +70,18 @@
                         include("model/conexion.php");
                         $sql = $conexion->query("select * from carros");
                         while ($datos = $sql->fetch_object()) { ?>
-                            <tr>
-                                <th><?= $datos->placa ?> </th>
-                                <td><?= $datos->marca ?></td>
-                                <td><?= $datos->modelo ?></td>
-                                <td><?= $datos->anio ?></td>
-                                <td><?= $datos->color ?></td>
-                                <td><a href="view/view_modificar.php?id=<?= $datos->placa?>" class="text-center btn btn-warning "><i class="fa-regular fa-pen-to-square"></i></a></td>
-                                <td><a href="" class="text-center btn btn-danger "><i class="fa-solid fa-trash"></i></a></td>
-                            </tr>
+                        <tr>
+                            <th><?= $datos->placa ?> </th>
+                            <td><?= $datos->marca ?></td>
+                            <td><?= $datos->modelo ?></td>
+                            <td><?= $datos->anio ?></td>
+                            <td><?= $datos->color ?></td>
+                            <td><a href="view/view_modificar.php?id=<?= $datos->placa?>"
+                                    class="text-center btn btn-warning "><i class="fa-regular fa-pen-to-square"></i></a>
+                            </td>
+                            <td><a onclick="return eliminar()" href="index.php?id=<?= $datos->placa?>" class="text-center btn btn-danger "><i
+                                        class="fa-solid fa-trash"></i></a></td>
+                        </tr>
                         <?php }
                         ?>
 
@@ -83,7 +92,8 @@
     </div>
 
     <script src="js/codigo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
 </body>
 
